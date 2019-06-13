@@ -1,6 +1,5 @@
 from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E
 import pyautogui
-import time
 def GetMousePos():
     x, y = pyautogui.position()
     return x, y
