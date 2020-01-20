@@ -5,17 +5,20 @@ def GetMousePos():
     return x, y
 
 s = socket.socket()
-s.bind(('', 8080))
+s.bind(('', 12345))
 
 s.listen(5)
 
 while True: 
-   c, addr = s.accept()      
+   c, addr = s.accept()
    print ('Got connection from' + str(addr))
    while True:
       try:
          c.send(str(GetMousePos()).encode())
-      except:
+      except(ConnectionResetError):
+         print("Connection ended")
          break
+      except(KeyboardInterrupt):
+         exit
       time.sleep(1)
    c.close()

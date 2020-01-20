@@ -12,5 +12,5 @@ s.connect(('127.0.0.1', port))
 
 # receive data from the server 
 while True:
-    print (s.recv(1024))
+    print (s.recv(1024).decode())
     time.sleep(1)
