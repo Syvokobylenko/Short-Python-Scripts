@@ -1,16 +1,15 @@
-# Import socket module 
-import socket, time		 
+import socket, time, pyautogui
 
-# Create a socket object 
-s = socket.socket()		 
+posold = [0,0]
 
-# Define the port on which you want to connect 
-port = 12345				
+s = socket.socket()
+s.connect(('127.0.0.1', 12345))
 
-# connect to the server on local computer 
-s.connect(('127.0.0.1', port)) 
-
-# receive data from the server 
 while True:
-    print (s.recv(1024).decode())
+    pos = s.recv(1024).decode().split("#")
+    pos = pos[:2]
+    pos = [int(i) for i in pos]
+    if pos != posold:
+        pyautogui.moveTo(pos[0], pos[1], 0)
+        posold = pos.copy
     time.sleep(1)
