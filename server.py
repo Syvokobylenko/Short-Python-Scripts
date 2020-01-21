@@ -22,5 +22,5 @@ while True:
          break
       except(KeyboardInterrupt):
          exit
-      time.sleep(1)
+      time.sleep(0.05)
    c.close()
