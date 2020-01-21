@@ -2,7 +2,9 @@ import socket, time, pyautogui
 
 def GetMousePos():
     x, y = pyautogui.position()
-    return str(x) + "#" + str(y)
+    x = str(x).zfill(4)
+    y = str(y).zfill(4)
+    return x + "#" + y
 
 s = socket.socket()
 s.bind(('', 12345))
