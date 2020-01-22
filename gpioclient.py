@@ -1,4 +1,18 @@
+import RPi.GPIO as GPIO
 import socket, time
+
+
+class switchObject():
+    def __init__(self, channel):
+        self.channel = channel
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(channel, GPIO.OUT)
+
+    def switch(self, state):
+        if state:
+            GPIO.output(self.channel, GPIO.HIGH)
+        else:
+            GPIO.output(self.channel, GPIO.LOW)
 
 class connection:
     def __init__(self, IP, port, lenght):
@@ -26,9 +40,11 @@ class connection:
             return self.recieveData()
         except(KeyboardInterrupt):
             exit
+    
 
 data = connection("127.0.0.1", 12345, 1)
 
+switchCreate = switchObject(21)
+
 while True:
-    switch = bool(int(data.recieveData()))
-    print(switch)
+    switchCreate.switch(bool(int(data.recieveData())))
