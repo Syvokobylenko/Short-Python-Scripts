@@ -27,6 +27,7 @@ class connection:
             self.s.connect((self.IP, self.port))
         except(ConnectionRefusedError):
             time.sleep(5)
+            self.s.close
             self.startConnection()
         except(KeyboardInterrupt):
             exit
