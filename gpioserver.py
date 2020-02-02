@@ -1,18 +1,34 @@
-import socket
+import socket, time
 
-s = socket.socket()
-s.bind(('', 12345))
+class connection:
+    def __init__(self, IP, port):
+        self.IP = IP
+        self.port = port
+        self.startConnection()
 
-s.listen(5)
+    def startConnection(self):
+        self.s = socket.socket()
+        try:
+            self.s.connect((self.IP, self.port))
+        except(ConnectionRefusedError):
+            time.sleep(2)
+            self.s.close
+            self.startConnection()
+        except(KeyboardInterrupt):
+            exit
+        
+    def sendData(self, state):
+        try:
+            self.s.send(state).encode()
+        except(ConnectionResetError):
+            self.s.close
+            self.startConnection()
+            self.sendData(state)
+        except(KeyboardInterrupt):
+            exit
+    
 
-while True: 
-   c, addr = s.accept()
-   print ('Got connection from' + str(addr))
-   while True:
-      try:
-         c.send(input("Type 1 or 0 to use switch: ").encode())
-      except(ConnectionResetError):
-         print("Connection ended")
-      except(KeyboardInterrupt):
-         exit
-   c.close()
+data = connection("127.0.0.1", 2198)
+
+while True:
+   data.sendData(input("Type 1 or 0 to use switch: "))
