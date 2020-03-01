@@ -7,7 +7,7 @@ pyautogui.press('enter')
 file1 = open('copy.txt', 'r')
 f = file1.readlines()
 for line in f:
- pyautogui.write("f.write('" + line.rstrip('\n') + "\\n')")
+ pyautogui.write("f.write(r'" + line.rstrip('\n') + r"' + '\n')")
  #for i in range(1,10):
  # pyautogui.press('backspace')
  #pyautogui.write(line.rstrip('\n'))
