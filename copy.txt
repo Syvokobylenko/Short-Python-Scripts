@@ -1,4 +1,0 @@
-This file can be copied using writefile.py
-writefile.py uses python comands to write
-its usefull for copying stuff with just console
-use it with micropythoN, to save space from installing libraries for file transfer
