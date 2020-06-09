@@ -1,25 +1,21 @@
-from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E
+import tkinter
 import pyautogui
-def GetMousePos():
-    x, y = pyautogui.position()
-    return x, y
-
 
 class mousegui:
-    def __init__(self, master):
-        self.master = master
-        master.title("Mouse Position")
-        self.PosLabel = Label(root, text=GetMousePos())
+    def __init__(self):
+        self.master = tkinter.Tk()
+        self.master.title("Mouse Position")
+        self.PosLabel = tkinter.Label(self.master, text=pyautogui.position())
         self.PosLabel.grid(row=0, column=0)
-        self.add_button = Button(master, text="Confirm", command=self.Confirm)
+        self.add_button = tkinter.Button(self.master, text="Exit", command=self.exit)
         self.add_button.grid(row=0, column=1)
         self.refresh()
-    def refresh(self):
-        self.PosLabel.configure(text=GetMousePos())
-        self.PosLabel.after(1000, self.refresh)
-    def Confirm(self):
-        root.destroy()
+        self.master.mainloop()
 
-root = Tk()
-my_gui = mousegui(root)
-root.mainloop()
+    def refresh(self):
+        self.PosLabel.configure(text=pyautogui.position())
+        self.PosLabel.after(1000, self.refresh)
+    def exit(self):
+        self.master.destroy()
+
+mousegui()
