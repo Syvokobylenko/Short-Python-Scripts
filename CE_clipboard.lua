@@ -10,3 +10,4 @@ end
 copytimer=createTimer(nil)
 copytimer.OnTimer=CopyAddresslistValuesToClipboard
 copytimer.Interval=100
+copytimer.Enabled=true
